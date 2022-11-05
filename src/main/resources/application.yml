@@ -1,0 +1,27 @@
+server:
+  port: 80
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/reggie
+    username: root
+    password: prynnekey
+  application:
+    # 应用的名称，可选
+    name: reggie_take_out
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id
+  configuration:
+    # 表名：address_book ---> AddressBook
+    # 字段名：user_name ----> userName
+    # 在映射实体或者属性时，将数据库中的表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    # 开启日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+reggie:
+  upload:
+    path: D:\img\
