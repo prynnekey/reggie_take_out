@@ -6,6 +6,7 @@ import com.itheima.reggie.entity.User;
 import com.itheima.reggie.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 移动端用户登录
      * @param user
@@ -36,6 +40,9 @@ public class UserController {
         //获取手机号
         String phone = user.getPhone();
         //获取验证码
+
+        //从Redis中获取验证码
+        //Object code = redisTemplate.opsForValue().get(phone);
 
         //判断验证码是否正确
 
@@ -58,6 +65,9 @@ public class UserController {
         userService.save(user);
         //登录成功后将id保存到session中
         request.getSession().setAttribute("user", user.getId());
+
+        //删除Redis中缓存的验证码
+        //redisTemplate.delete(phone);
 
         return R.success(user);
     }
