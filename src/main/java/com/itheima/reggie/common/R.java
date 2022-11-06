@@ -2,6 +2,7 @@ package com.itheima.reggie.common;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * @author prynn
  */
 @Data
-public class R<T> {
+public class R<T> implements Serializable {
 
     /**
      * 编码：1成功 0和其他失败
