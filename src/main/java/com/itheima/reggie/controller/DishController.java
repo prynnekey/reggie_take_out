@@ -234,7 +234,7 @@ public class DishController {
         }).collect(Collectors.toList());
 
         //如果不存在，查询数据并将查询到的数据存入Redis中
-        redisTemplate.opsForValue().set(key, dishDtoList, 1, TimeUnit.DAYS);
+        redisTemplate.opsForValue().set(key, dishDtoList, 30, TimeUnit.MINUTES);
 
         return R.success(dishDtoList);
     }
