@@ -40,4 +40,4 @@ mybatis-plus:
 
 reggie:
   upload:
-    path: D:\img\
+    path: /usr/local/javaapp/img
