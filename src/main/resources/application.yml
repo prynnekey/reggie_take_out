@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 spring:
   redis:
     host: 192.168.138.128
@@ -19,6 +19,13 @@ spring:
     redis:
       # 缓存过期时间，单位ms
       time-to-live: 1800000
+  mvc:
+    pathmatch:
+      # 地址：https://blog.csdn.net/Java_web12138667/article/details/123168600
+      # 解决加入swagger的异常 knife4j-spring-boot-starter
+      # 异常场景：springboot2.6.x 搭配 springfox 3.0.0
+      # 出现原因：springfox 3.0.0 错误导致
+      matching-strategy: ant_path_matcher
 mybatis-plus:
   global-config:
     db-config:

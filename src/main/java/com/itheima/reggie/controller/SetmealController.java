@@ -11,6 +11,10 @@ import com.itheima.reggie.entity.SetmealDish;
 import com.itheima.reggie.service.CategoryService;
 import com.itheima.reggie.service.SetmealDishService;
 import com.itheima.reggie.service.SetmealService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/setmeal")
 @Slf4j
+@Api(tags = "套餐相关接口")
 public class SetmealController {
 
     @Autowired
@@ -52,6 +57,12 @@ public class SetmealController {
      * @return 分页数据
      */
     @GetMapping("/page")
+    @ApiOperation(value = "套餐分页查询接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页码", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "每页展示多少条数据", required = true),
+            @ApiImplicitParam(name = "name", value = "要查询的套餐名称")
+    })
     public R<Page<SetmealDto>> page(int page, int pageSize, String name) {
         log.info("page:{},pageSize:{},name:{}", page, pageSize, name);
 
@@ -101,6 +112,7 @@ public class SetmealController {
 
     @PostMapping
     @CacheEvict(value = "setmealCache", allEntries = true)
+    @ApiOperation("新增套餐接口")
     public R<String> save(@RequestBody SetmealDto setmealDto) {
         log.info("setmealDto:{}", setmealDto);
         setmealService.saveWithSetmealDish(setmealDto);
